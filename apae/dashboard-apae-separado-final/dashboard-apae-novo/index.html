@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard APAE - Sistema de Gestão Avançado</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body class="light-theme">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-animation">
+                    <i class="fas fa-heart pulse"></i>
+                </div>
+            </div>
+            <div class="loading-text">
+                <h2>Dashboard APAE</h2>
+                <p>Carregando sistema...</p>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+        <div class="login-container">
+            <!-- Background Animation -->
+            <div class="login-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                </div>
+            </div>
+
+            <!-- Login Card -->
+            <div class="login-card animate__animated animate__fadeInUp">
+                <!-- Header -->
+                <div class="login-header">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h1>APAE</h1>
+                    </div>
+                    <p class="login-subtitle">Sistema de Gestão Integrado</p>
+                </div>
+
+                <!-- Form -->
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="email">
+                            <i data-feather="mail"></i>
+                            Email
+                        </label>
+                        <input type="email" id="email" class="form-input" placeholder="seu@email.com" required>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">
+                            <i data-feather="lock"></i>
+                            Senha
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle" id="password-toggle">
+                                <i data-feather="eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="remember-me">
+                            <span class="checkmark"></span>
+                            Lembrar de mim
+                        </label>
+                        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn" id="login-btn">
+                        <span class="btn-content">
+                            <i data-feather="log-in"></i>
+                            Entrar
+                        </span>
+                        <div class="btn-loading">
+                            <div class="spinner"></div>
+                            Entrando...
+                        </div>
+                    </button>
+                </form>
+
+                <!-- Footer -->
+                <div class="login-footer">
+                    <p>Não tem uma conta? <a href="#">Solicitar acesso</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboard-screen" class="screen">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-heart"></i>
+                    <span>APAE</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link" data-page="dashboard">
+                            <i data-feather="home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="patients">
+                            <i data-feather="users"></i>
+                            <span>Pacientes</span>
+                            <span class="nav-badge">128</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="staff">
+                            <i data-feather="user-check"></i>
+                            <span>Funcionários</span>
+                            <span class="nav-badge">45</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="schedules">
+                            <i data-feather="calendar"></i>
+                            <span>Escalas</span>
+                            <span class="nav-badge">8</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="reports">
+                            <i data-feather="bar-chart-2"></i>
+                            <span>Relatórios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="settings">
+                            <i data-feather="settings"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="User" id="user-avatar">
+                    </div>
+                    <div class="user-info">
+                        <p class="user-name" id="sidebar-user-name">Usuário</p>
+                        <p class="user-role" id="sidebar-user-role">Administrador</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobile-menu-btn">
+                        <i data-feather="menu"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Dashboard</span>
+                        <i data-feather="chevron-right"></i>
+                        <span class="breadcrumb-item current">Visão Geral</span>
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="search-container">
+                        <i data-feather="search"></i>
+                        <input type="text" placeholder="Buscar pacientes, funcionários..." class="search-input" id="global-search">
+                        <div class="search-results" id="search-results"></div>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+                        <i data-feather="sun"></i>
+                    </button>
+                    
+                    <div class="notifications" id="notifications">
+                        <button class="notification-btn">
+                            <i data-feather="bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notificações</h3>
+                                <button class="mark-all-read">Marcar todas como lidas</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i data-feather="user-plus"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>Novo paciente cadastrado</p>
+                                        <span class="notification-time">5 min atrás</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i data-feather="calendar"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>Escala atualizada para amanhã</p>
+                                        <span class="notification-time">15 min atrás</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon">
+                                        <i data-feather="alert-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>Sistema será atualizado às 23h</p>
+                                        <span class="notification-time">1h atrás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="user-menu" id="user-menu">
+                        <button class="user-menu-btn">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User" class="user-avatar-small">
+                            <span class="user-name-header" id="user-name-header">Usuário</span>
+                            <i data-feather="chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="#" class="dropdown-item">
+                                <i data-feather="user"></i>
+                                Meu Perfil
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i data-feather="settings"></i>
+                                Configurações
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" id="logout-btn">
+                                <i data-feather="log-out"></i>
+                                Sair
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content" id="page-content">
+                <!-- Dashboard Content -->
+                <div class="page" id="dashboard-page">
+                    <!-- Welcome Section -->
+                    <section class="welcome-section">
+                        <div class="welcome-content">
+                            <h1 class="welcome-title">
+                                Bem-vindo de volta, <span id="welcome-user-name">Usuário</span>! 👋
+                            </h1>
+                            <p class="welcome-subtitle">
+                                Aqui está um resumo das atividades de hoje
+                            </p>
+                        </div>
+                        <div class="welcome-actions">
+                            <button class="btn btn-primary">
+                                <i data-feather="plus"></i>
+                                Novo Paciente
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i data-feather="download"></i>
+                                Relatório
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Stats Cards -->
+                    <section class="stats-section">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-blue">
+                                    <i data-feather="users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="128">0</h3>
+                                    <p class="stat-label">Pacientes Ativos</p>
+                                    <div class="stat-change positive">
+                                        <i data-feather="trending-up"></i>
+                                        +12% este mês
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon bg-green">
+                                    <i data-feather="calendar-check"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="45">0</h3>
+                                    <p class="stat-label">Atendimentos Hoje</p>
+                                    <div class="stat-change positive">
+                                        <i data-feather="trending-up"></i>
+                                        +8% esta semana
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon bg-purple">
+                                    <i data-feather="user-check"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="32">0</h3>
+                                    <p class="stat-label">Funcionários</p>
+                                    <div class="stat-change neutral">
+                                        <i data-feather="minus"></i>
+                                        Sem alteração
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon bg-orange">
+                                    <i data-feather="activity"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="98">0</h3>
+                                    <p class="stat-label">Taxa de Ocupação (%)</p>
+                                    <div class="stat-change positive">
+                                        <i data-feather="trending-up"></i>
+                                        +5% esta semana
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Charts Section -->
+                    <section class="charts-section">
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h3>Atendimentos por Mês</h3>
+                                    <div class="chart-actions">
+                                        <button class="btn btn-sm btn-ghost">
+                                            <i data-feather="download"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-ghost">
+                                            <i data-feather="more-horizontal"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h3>Distribuição por Especialidade</h3>
+                                    <div class="chart-actions">
+                                        <button class="btn btn-sm btn-ghost">
+                                            <i data-feather="download"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-ghost">
+                                            <i data-feather="more-horizontal"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="specialtyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Recent Activity -->
+                    <section class="activity-section">
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <h3>Atividades Recentes</h3>
+                                <button class="btn btn-sm btn-ghost">Ver todas</button>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-blue">
+                                        <i data-feather="user-plus"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p><strong>Maria Silva</strong> foi cadastrada como nova paciente</p>
+                                        <span class="activity-time">5 minutos atrás</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-green">
+                                        <i data-feather="calendar"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p><strong>Dr. João</strong> atualizou a escala de fisioterapia</p>
+                                        <span class="activity-time">15 minutos atrás</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-purple">
+                                        <i data-feather="file-text"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p>Relatório mensal de atendimentos foi gerado</p>
+                                        <span class="activity-time">1 hora atrás</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-orange">
+                                        <i data-feather="settings"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p>Sistema foi atualizado para versão 2.1.0</p>
+                                        <span class="activity-time">2 horas atrás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Other pages will be loaded dynamically -->
+                <div class="page" id="patients-page" style="display: none;">
+                    <h1>Pacientes</h1>
+                    <p>Página de gerenciamento de pacientes em desenvolvimento...</p>
+                </div>
+
+                <div class="page" id="staff-page" style="display: none;">
+                    <h1>Funcionários</h1>
+                    <p>Página de gerenciamento de funcionários em desenvolvimento...</p>
+                </div>
+
+                <div class="page" id="schedules-page" style="display: none;">
+                    <h1>Escalas</h1>
+                    <p>Página de gerenciamento de escalas em desenvolvimento...</p>
+                </div>
+
+                <div class="page" id="reports-page" style="display: none;">
+                    <h1>Relatórios</h1>
+                    <p>Página de relatórios em desenvolvimento...</p>
+                </div>
+
+                <div class="page" id="settings-page" style="display: none;">
+                    <h1>Configurações</h1>
+                    <p>Página de configurações em desenvolvimento...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>
+

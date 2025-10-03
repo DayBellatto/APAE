@@ -1,0 +1,18 @@
+ajustes Day 
+
+-colocar um hover no botão de pacientes
+-diminuir tamanho do placeholder dos campos cfp e telefone
+mudar as cores dos icones
+
+
+-colocar um hover no botão de funcionarios
+-diminuir tamanho do placeholder dos campos cfp e telefone
+mudar as cores dos icones
+
+-colocar um hover no botão de funcionarios
+-diminuir tamanho do placeholder dos campos cfp e telefone
+mudar as cores dos icones
+
+cob.pior caso
+
+123456

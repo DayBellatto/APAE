@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard APAE - Sistema de Gestão</title>
+    <link rel="stylesheet" href="styles/main-melhorado.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <!-- Left side - Login form (30%) -->
+            <div class="login-form-side">
+                <div class="login-form-wrapper">
+                    <!-- Social Icons -->
+                    <div class="social-icons">
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+
+                    <!-- Logo -->
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="../apae/Imagens/apae-logo.png" alt="APAE Logo" class="logo-img">
+                        </div>
+                    </div>
+
+                    <!-- Form header -->
+                    <div class="form-header">
+                        <h1>Login</h1>
+                        <p>Entre com seus dados</p>
+                    </div>
+
+                    <!-- Login form -->
+                    <form id="login-form" class="login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="nome@exemplo.com" required>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="password-label-container">
+                                <label for="password">Password</label>
+                                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                            </div>
+                            <input type="password" id="password" class="form-control" required>
+                            <div class="error-message" id="password-error"></div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="login-btn">
+                            <span class="btn-text">Entre</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Entrando...
+                            </span>
+                        </button>
+                    </form>
+
+                    <div class="signup-link">
+                        Não tem conta? <a href="#">Clique aqui</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side - Image (70%) -->
+            <div class="image-container">
+                <img src="../apae/Imagens/multi-ethnic-disabled-people-community-with-pencils.jpg" alt="Login background">
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela do Dashboard -->
+    <div id="dashboard-screen" class="screen">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <!-- Logo e horário (esquerda) -->
+                <div class="header-left">
+                    <img src="../apae/Imagens/apae-logo.png" alt="APAE Logo" class="header-logo">
+                    <div class="header-info">
+                        <h1>Dashboard APAE</h1>
+                        <p id="current-datetime"></p>
+                    </div>
+                </div>
+
+                <!-- Mensagem de boas-vindas (centro) -->
+                <div class="header-center">
+                    <h2 id="welcome-message">Bem-vindo!</h2>
+                    <p class="welcome-user" id="welcome-user">Usuário</p>
+                </div>
+
+                <!-- User info e logout (direita) -->
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-details">
+                            <p class="user-name" id="user-name">Usuário</p>
+                            <p class="user-role" id="user-role">Usuário</p>
+                        </div>
+                        <span class="admin-badge" id="admin-badge" style="display: none;">Admin</span>
+                    </div>
+
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <p>Selecione um módulo abaixo para acessar as funcionalidades do sistema.</p>
+            </div>
+
+            <!-- Dashboard Cards Grid -->
+            <div class="cards-grid" id="cards-grid">
+                <!-- Cards serão inseridos dinamicamente via JavaScript -->
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <p class="stat-number">24</p>
+                        <p class="stat-label">Usuários Online</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <p class="stat-number">156</p>
+                        <p class="stat-label">Atendimentos Hoje</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <p class="stat-number">8</p>
+                        <p class="stat-label">Escalas Ativas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <p class="stat-number">98%</p>
+                        <p class="stat-label">Sistema Online</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

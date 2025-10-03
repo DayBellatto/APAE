@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard APAE - Sistema de Gestão e Escalas</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <link rel="stylesheet" href="./styles/dash.css">
+</head>
+<body>
+    <!-- Dashboard Screen -->
+    <div id="dashboard-screen" class="dashboard-screen active">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="./public/apae-logo.png" alt="">
+                <p>Apae</p>
+                 <p id="current-datetime"></p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+           <header class="header">
+    <!-- Mensagem de Boas-vindas (este item será centralizado) -->
+    <div class="header-center">
+        <h1 class="welcome-title">Bem-vindo de volta! 👋</h1>
+        <p class="welcome-subtitle">Selecione um módulo abaixo para acessar as funcionalidades do sistema. </p>
+    </div>
+
+    <!-- Botão de Sair (este item será alinhado à direita) -->
+    <div class="header-right">
+        <button class="logout-btn" onclick="window.location.href = 'login.html';">
+            <i data-feather="log-out"></i>
+            Sair
+        </button>
+    </div>
+</header>
+                
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                   
+                <div class="stat-card">
+                    <div class="stat-icon bg-blue">
+                     <i data-feather="users"></i>
+                    </div>
+                    <div class="stat-content">
+                       <a href="http://127.0.0.1:5500/apae/Pacientes/pac.html"> <h3 class="stat-number">Pacientes</h3></a> 
+                        <p>Informações de pacientes e gerenciamento de cadastro.</p>
+                        <div class="stat-change">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon bg-green">
+                     <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div class="stat-content">
+                        <a href="http://127.0.0.1:5500/apae/Funcionarios/func.html"> <h3 class="stat-number">Especialistas</h3></a> 
+                        <p>Gestão de colaboradores e gerenciamento de cadastro.</p>
+                        <div class="stat-change">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon bg-purple">
+                     <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="stat-content">
+                           <a href="http://127.0.0.1:5500/apae/Configuracoes/config.html"> <h3 class="stat-number">Configurações</h3></a> 
+                           <p>Gerenciamento de acessos e inclusoes de colaboradores.  </p>
+                        <div class="stat-change">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon bg-orange">
+                    <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-content">
+                           <a href="http://127.0.0.1:5500/apae/Escalas/escalas.html"> <h3 class="stat-number">Escalas</h3></a> 
+                           <p></p>
+                        <div class="stat-change">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Feed Section -->
+            <section class="news-feed-section">
+                <div class="news-feed-header">
+                    <h3>Notícias e Artigos</h3>
+                    <div class="search-container">
+                        <i data-feather="search" class="search-icon"></i>
+                        <input type="text" id="news-search-input" placeholder="Buscar notícias...">
+                    </div>
+                </div>
+                <div id="news-feed-content" class="news-feed-content">
+                    <!-- Artigos serão inseridos aqui -->
+                </div>
+                <div id="news-loading-overlay" class="news-loading-overlay" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Carregando notícias...</p>
+                </div>
+            </section>
+           
+        </main>
+    </div>
+       <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+    <script src="./js/dashboard.js"></script>
+    <script src="./js/dashboard-auth.js"></script>
+    <script>feather.replace();</script>
+</body>
+</html>

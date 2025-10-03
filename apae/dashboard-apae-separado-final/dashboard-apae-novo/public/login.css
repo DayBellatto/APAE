@@ -1,0 +1,215 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    background-color: #e2dede;
+}
+
+/* Main container */
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.login-form-wrapper .social-icons {
+    display: flex;           /* Alinha os ícones em linha */
+    justify-content: left; /* Centraliza horizontalmente */
+    gap: 16px;               /* Espaçamento entre os ícones */
+    margin-bottom: 16px;
+}
+
+.login-form-wrapper .social-icons i.fa-brands {
+    font-size: 32px;
+    color: #59565a;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.login-form-wrapper .social-icons i.fa-brands:hover {
+    transform: scale(1.2);
+    color: #E1306C;
+}
+
+/* Left side - Login form (30% width) */
+.login-container {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    /* Transparent background with glass effect */
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    /* Rounded corners */
+    border-radius: 20px;
+    /* Add subtle shadow to enhance the rounded edges */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    /* Add margin to separate from edges */
+    margin: 2rem;
+    z-index: 10;
+}
+
+.login-form-wrapper {
+    width: 100%;
+    max-width: 320px; /* Slightly reduced to fit better in the narrower container */
+}
+
+/* Logo */
+.logo-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 7rem;
+}
+
+.logo {
+    width: 90px;
+    height: 100px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:150px;
+}
+
+.logo-img {
+        width: 150px;
+        height: auto;
+        }
+
+/* Form header */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h1 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.password-label-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-password {
+    font-size: 0.75rem;
+    color: #666;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #5d636a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #3a7bc8;
+}
+
+/* Sign up link */
+.signup-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.signup-link a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Right side - Image (70% width) */
+.image-container {
+    width: 70%; /* Changed from 50% to 70% */
+    background-color: #e9e9e9;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) { /* Increased breakpoint for better experience */
+    .container {
+        flex-direction: column;
+    }
+
+    .login-container {
+        width: 100%;
+        order: 2;
+        padding: 2rem 1.5rem;
+    }
+
+    .image-container {
+        width: 100%;
+        height: 200px;
+        order: 1;
+    }
+}
