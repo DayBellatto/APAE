@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard APAE - Sistema de Gestão</title>
-    <link rel="stylesheet" href="main-melhorado.css">
+    <link rel="stylesheet" href="./dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -81,7 +81,7 @@
                 <div class="header-left">
                     <img src="apae-logo.png" alt="APAE Logo" class="header-logo">
                     <div class="header-info">
-                        <h1>Dashboard APAE</h1>
+                        <h1>Dashboard</h1>
                         <p id="current-datetime"></p>
                     </div>
                 </div>
@@ -94,19 +94,21 @@
 
                 <!-- User info e logout (direita) -->
                 <div class="header-right">
-                    <div class="user-info">
+                   <div class="user-info">
                         <div class="user-details">
-                            <p class="user-name" id="user-name">Usuário</p>
-                            <p class="user-role" id="user-role">Usuário</p>
+                            <p class="user-name" id="user-name"></p>
+                            <p class="user-role" id="user-role"></p>
                         </div>
-                        <span class="admin-badge" id="admin-badge" style="display: none;">Admin</span>
+                        <span class="admin-badge" id="admin-badge" style="display: none;"></span>
                     </div>
-
-                    <button class="logout-btn" id="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Sair</span>
-                    </button>
                 </div>
+
+                  <div class = "btn">
+                        <button class="logout-btn" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sair</span>
+                        </button>
+                    </div>
             </div>
         </header>
 
@@ -123,32 +125,6 @@
             </div>
 
             <!-- Quick Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-content">
-                        <p class="stat-number">24</p>
-                        <p class="stat-label">Usuários Online</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-content">
-                        <p class="stat-number">156</p>
-                        <p class="stat-label">Atendimentos Hoje</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-content">
-                        <p class="stat-number">8</p>
-                        <p class="stat-label">Escalas Ativas</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-content">
-                        <p class="stat-number">98%</p>
-                        <p class="stat-label">Sistema Online</p>
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 

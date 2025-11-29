@@ -218,97 +218,55 @@ body {
 }
 
 /* ===== ESTILOS DO DASHBOARD MELHORADO ===== */
-.dashboard-header {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #e5e5e5;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
 
 .header-content {
-    width: 1400px;
-    padding: 1.5rem 2rem; /* Adiciona 1.5rem de padding vertical e 2rem de padding horizontal */
-    display: flex;
-    justify-content: space-between;
+    display:flexbox; 
+    justify-content:space-between; 
     align-items: center;
-    height: 5rem;
+    width: 100%; 
+    margin-top: 35px;
+    padding-left:10px;
+    padding-right:10px;
 }
 
-/* Header Left - Logo e Horário */
 .header-left {
     display: flex;
-    align-items: l;
-    gap: 1rem;
-    flex: 1;
+    align-items: center;
+    gap: 15px; /* Adiciona espaço entre o logo e o texto */
 }
 
 .header-logo {
-    width:70px;
-    height: 60px;
+    width:auto;
+    height: 70px;
 }
 
 .header-info h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 0.25rem;
-}
-
-.header-info p {
-    font-size: 0.875rem;
-    color: #6b7280;
-}
-
-/* Header Center - Mensagem de Boas-vindas */
-.header-center {
-    text-align: center;
-    flex: 1;
-}
-
-.header-center h2 {
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #1f2937;
     margin-bottom: 0.25rem;
 }
 
-.welcome-user {
-    font-size: 1rem;
-    color: #3b82f6;
-    font-weight: 500;
-}
-
-/* Header Right - User Info e Logout */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-    justify-content: flex-end;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.user-details {
-    text-align: right;
-}
-
-.user-name {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #1f2937;
-}
-
-.user-role {
-    font-size: 0.75rem;
+.header-info p {
+    font-size: 0.95rem;
     color: #6b7280;
 }
+
+.header-center{
+text-align: center;
+font-size: 2.5rem;
+font-weight: 900 px;
+color: #1f2937;
+margin-bottom: 0.25rem;
+
+}
+
+.header-center p{
+font-size: 0.95rem;
+color: #6b7280;
+text-align: center;
+}
+
 
 .admin-badge {
     background-color: #f3f4f6;
@@ -320,8 +278,8 @@ body {
 }
 
 .logout-btn {
-    display: flex;
-    align-items: center;
+   position: flex;
+   text-align: right;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
     background: linear-gradient(135deg, #ef4444, #dc2626);
@@ -338,7 +296,7 @@ body {
 .logout-btn:hover {
     background: linear-gradient(135deg, #dc2626, #b91c1c);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 8px rgba(244, 90, 90, 0.3);
 }
 
 .logout-btn i {
@@ -354,13 +312,15 @@ body {
 
 .welcome-section {
     margin-bottom: 2rem;
+  
     text-align: center;
 }
 
 .welcome-section p {
     color: #6b7280;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 400;
+    margin-top: 15px;
 }
 
 /* Cards Grid */
@@ -369,6 +329,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-bottom: 3rem;
+    margin-top: 15px;
 }
 
 .dashboard-card {

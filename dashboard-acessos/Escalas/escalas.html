@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema APAE - Escala de Vínculos</title>
+    
+    <link rel="stylesheet" href="../Principal/principal.css">
+    
+    <link rel="stylesheet" href="../Escalas/escalas.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../apae-logo.png" alt="Logo">
+            </div>
+            
+            <nav class="menu">
+                <ul class="active">
+                    <li><a href="http://127.0.0.1:5500/dashboard-acessos/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard Geral</a></li>
+                    <li><a href="../Principal/principal.html"><i class="fa-solid fa-file-pen"></i> Agendamentos</a></li>
+                    
+                    <li class="active"><a href="#"><i class="fas fa-calendar"></i> Escalas</a></li>
+                    
+                    <li><a href="../Funcionarios/func.html"><i class="fa-solid fa-user-doctor"></i> Funcionários</a></li>
+                    <li><a href="../Pacientes/pac.html"><i class="fa-solid fa-person"></i> Pacientes</a></li>
+                    <li><a href="../Configuracoes/config.html"><i class="fas fa-cog"></i> Configurações</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Usuário</h4>
+                    <p>Minha Conta</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="main-header">
+                <h1>Escala de Vínculos</h1>
+                <button id="novo-paciente-btn" class="btn-primary">
+                    <i class="fas fa-plus"></i> Novo Paciente
+                </button>
+            </div>
+
+            <section class="import-section">
+                <div class="import-header">
+                    <i class="fas fa-upload"></i>
+                    <h3>Importar Profissionais</h3>
+                </div>
+                
+                <div class="import-controls">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="file-import" class="file-input" accept=".csv,.json" />
+                        <label for="file-import" class="file-input-label">
+                            <i class="fas fa-file-upload"></i>
+                            Selecionar Arquivo
+                        </label>
+                    </div>
+                    
+                    <button id="import-btn" class="btn-primary" disabled>
+                        <i class="fas fa-download"></i> Importar
+                    </button>
+                    
+                    <span id="file-status" class="file-status">Nenhum arquivo selecionado</span>
+                </div>
+                
+                <div class="import-format-info">
+                    <h4><i class="fas fa-info-circle"></i> Formato de Importação (Profissionais)</h4>
+                    <p>Aceita arquivos CSV ou JSON com as seguintes colunas obrigatórias:</p>
+                    <ul>
+                        <li><strong>nome:</strong> Nome do profissional</li>
+                        <li><strong>especialidade:</strong> Especialidade do profissional</li>
+                        <li><strong>disponivel:</strong> true/false (opcional, padrão: true)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="pacientes-section">
+                <h2>Pacientes Cadastrados</h2>
+                <div id="pacientes-container" class="pacientes-container">
+                    <div class="empty-state">
+                        <p>Nenhum paciente cadastrado. Adicione um paciente para começar.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="semana-controls">
+                <button id="semana-anterior" class="btn-secondary">
+                    <i class="fas fa-chevron-left"></i> Semana Anterior
+                </button>
+                <div class="semana-atual">
+                    <span id="periodo-semana"></span>
+                </div>
+                <button id="proxima-semana" class="btn-secondary">
+                    Próxima Semana <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="escala-container">
+                <div class="escala-header">
+                    <h2>Escala de Vínculos Confirmados</h2>
+                </div>
+                <div class="escala-grid">
+                    <div class="grid-header horario-header">Horário</div>
+                    <div class="grid-header" id="header-dia-1">
+                        <div class="dia-nome">Segunda</div>
+                        <div class="dia-data" id="data-1"></div>
+                    </div>
+                    <div class="grid-header" id="header-dia-2">
+                        <div class="dia-nome">Terça</div>
+                        <div class="dia-data" id="data-2"></div>
+                    </div>
+                    <div class="grid-header" id="header-dia-3">
+                        <div class="dia-nome">Quarta</div>
+                        <div class="dia-data" id="data-3"></div>
+                    </div>
+                    <div class="grid-header" id="header-dia-4">
+                        <div class="dia-nome">Quinta</div>
+                        <div class="dia-data" id="data-4"></div>
+                    </div>
+                    <div class="grid-header" id="header-dia-5">
+                        <div class="dia-nome">Sexta</div>
+                        <div class="dia-data" id="data-5"></div>
+                    </div>
+
+                    <div class="periodo-header manha">
+                        <i class="fas fa-sun"></i> Manhã (08:00 - 12:00)
+                    </div>
+
+                    <div class="horario-label">08:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="08:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="08:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="08:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="08:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="08:00"></div>
+                    
+                    <div class="horario-label">08:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="08:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="08:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="08:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="08:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="08:30"></div>
+
+                    <div class="horario-label">09:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="09:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="09:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="09:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="09:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="09:00"></div>
+
+                    <div class="horario-label">09:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="09:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="09:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="09:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="09:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="09:30"></div>
+
+                    <div class="horario-label">10:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="10:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="10:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="10:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="10:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="10:00"></div>
+
+                    <div class="horario-label">10:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="10:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="10:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="10:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="10:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="10:30"></div>
+
+                    <div class="horario-label">11:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="11:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="11:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="11:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="11:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="11:00"></div>
+
+                    <div class="horario-label">11:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="11:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="11:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="11:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="11:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="11:30"></div>
+
+                    <div class="horario-label">12:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="12:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="12:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="12:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="12:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="12:00"></div>
+                    
+                    <div class="periodo-header tarde">
+                        <i class="fas fa-sun"></i> Tarde (13:00 - 17:00)
+                    </div>
+
+                    <div class="horario-label">13:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="13:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="13:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="13:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="13:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="13:00"></div>
+
+                    <div class="horario-label">13:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="13:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="13:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="13:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="13:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="13:30"></div>
+
+                    <div class="horario-label">14:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="14:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="14:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="14:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="14:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="14:00"></div>
+
+                    <div class="horario-label">14:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="14:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="14:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="14:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="14:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="14:30"></div>
+
+                    <div class="horario-label">15:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="15:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="15:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="15:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="15:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="15:00"></div>
+
+                    <div class="horario-label">15:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="15:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="15:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="15:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="15:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="15:30"></div>
+
+                    <div class="horario-label">16:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="16:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="16:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="16:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="16:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="16:00"></div>
+
+                    <div class="horario-label">16:30</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="16:30"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="16:30"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="16:30"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="16:30"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="16:30"></div>
+
+                    <div class="horario-label">17:00</div>
+                    <div class="slot-horario" data-dia="Segunda" data-horario="17:00"></div>
+                    <div class="slot-horario" data-dia="Terça" data-horario="17:00"></div>
+                    <div class="slot-horario" data-dia="Quarta" data-horario="17:00"></div>
+                    <div class="slot-horario" data-dia="Quinta" data-horario="17:00"></div>
+                    <div class="slot-horario" data-dia="Sexta" data-horario="17:00"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-paciente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Novo Paciente</h2>
+                <span class="close-modal" id="close-paciente">&times;</span>
+            </div>
+            <form id="paciente-form">
+                <div class="form-group">
+                    <label for="nome-paciente">Nome do Paciente</label>
+                    <input type="text" id="nome-paciente" placeholder="Digite o nome do paciente" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Especialidades Necessárias</label>
+                    <div class="especialidades-grid" id="especialidades-container">
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacoes-paciente">Observações</label>
+                    <textarea id="observacoes-paciente" placeholder="Observações adicionais" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="data-inicio">Data de Início dos Atendimentos</label>
+                    <input type="date" id="data-inicio" required>
+                </div>
+
+                <div class="periodo-restriction">
+                    <h4>
+                        <i class="fas fa-clock"></i>
+                        Restrições de Horário
+                    </h4>
+                    <p>Selecione sua preferência de período:</p>
+                    
+                    <div class="periodo-options">
+                        <div class="periodo-option">
+                            <input type="radio" id="periodo-flexivel" name="periodo-preferencia" value="flexivel" checked>
+                            <label for="periodo-flexivel">Flexível (manhã e tarde)</label>
+                        </div>
+                        <div class="periodo-option">
+                            <input type="radio" id="periodo-manha" name="periodo-preferencia" value="manha">
+                            <label for="periodo-manha">Apenas manhã (08:00 - 12:00)</label>
+                        </div>
+                        <div class="periodo-option">
+                            <input type="radio" id="periodo-tarde" name="periodo-preferencia" value="tarde">
+                            <label for="periodo-tarde">Apenas tarde (13:00 - 17:00)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="dias-preferencia">Dias da Semana Preferenciais (opcional)</label>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 8px;">
+                            <label><input type="checkbox" value="Segunda" name="dias-preferencia"> Segunda</label>
+                            <label><input type="checkbox" value="Terça" name="dias-preferencia"> Terça</label>
+                            <label><input type="checkbox" value="Quarta" name="dias-preferencia"> Quarta</label>
+                            <label><input type="checkbox" value="Quinta" name="dias-preferencia"> Quinta</label>
+                            <label><input type="checkbox" value="Sexta" name="dias-preferencia"> Sexta</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Adicionar</button>
+                    <button type="button" class="btn-secondary" id="cancel-paciente">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-escalas" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Opções de Escala Geradas</h2>
+                <span class="close-modal" id="close-escalas">&times;</span>
+            </div>
+            <div id="escalas-container">
+                </div>
+        </div>
+    </div>
+
+    <script src="./escalas.js"></script>
+</body>
+</html>

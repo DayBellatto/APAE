@@ -1,4 +1,4 @@
-// Módulo do Dashboard Melhorado
+// Dashboard Manager atualizado para funcionar com o novo layout
 class DashboardManager {
     constructor() {
         this.dashboardCards = [
@@ -8,7 +8,7 @@ class DashboardManager {
                 description: 'Resumo geral e métricas do sistema',
                 icon: 'fas fa-home',
                 color: 'bg-blue',
-                stats: '12 notificações',
+                stats: '',
                 accessible: true
             },
             {
@@ -17,7 +17,7 @@ class DashboardManager {
                 description: 'Gerenciamento de escalas de trabalho',
                 icon: 'fas fa-calendar-alt',
                 color: 'bg-green',
-                stats: '8 escalas ativas',
+                stats: '',
                 accessible: true
             },
             {
@@ -26,7 +26,7 @@ class DashboardManager {
                 description: 'Gestão de colaboradores e dados pessoais',
                 icon: 'fas fa-users',
                 color: 'bg-purple',
-                stats: '45 funcionários',
+                stats: '',
                 accessible: true
             },
             {
@@ -35,7 +35,7 @@ class DashboardManager {
                 description: 'Prontuários e informações de pacientes',
                 icon: 'fas fa-user-check',
                 color: 'bg-orange',
-                stats: '128 pacientes',
+                stats: '',
                 accessible: true
             },
             {
@@ -44,55 +44,68 @@ class DashboardManager {
                 description: 'Definições do sistema e permissões',
                 icon: 'fas fa-cog',
                 color: 'bg-red',
-                stats: 'Admin apenas',
-                accessible: false // Será definido dinamicamente
+                stats: '',
+                accessible: false 
             }
         ];
     }
 
-    // Renderizar cards do dashboard
+    // Renderizar cards
     renderCards() {
         const cardsGrid = document.getElementById('cards-grid');
         const user = authManager.getCurrentUser();
-        
+
         cardsGrid.innerHTML = '';
 
         this.dashboardCards.forEach(card => {
-            // Verificar acessibilidade do card
-            if (card.id === 'configuracoes' && !authManager.isAdmin()) {
-                return; // Não renderizar card de configurações para não-admins
-            }
+            if (card.id === 'configuracoes' && !authManager.isAdmin()) return;
 
             const cardElement = this.createCardElement(card, user);
             cardsGrid.appendChild(cardElement);
         });
+
+        this.addCardAnimations();
     }
 
-    // Criar elemento do card
+    // Criar card
     createCardElement(card, user) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'dashboard-card';
-        cardDiv.setAttribute('data-module', card.id);
+        cardDiv.dataset.module = card.id;
 
         cardDiv.innerHTML = `
             <div class="card-header">
                 <div class="card-icon ${card.color}">
-                    <i class="${card.icon}"></i>
+                    <i class="${card.icon}">
+</i>
                 </div>
-                ${card.id === 'configuracoes' && user.isAdmin ? 
-                    '<span class="card-badge">Admin</span>' : ''}
+
+                ${card.id === 'configuracoes' && user.isAdmin 
+                    ? '<span class="card-badge">Admin</span>' 
+                    : ''}
             </div>
+
             <div class="card-content">
                 <h3 class="card-title">${card.title}</h3>
                 <p class="card-description">${card.description}</p>
+
                 <div class="card-footer">
                     <span class="card-stats">${card.stats}</span>
-                    <button class="card-action">Acessar →</button>
+                        <button class="card-action" style="
+                        background:  #2c3e50;
+                        color:white;
+                        font-size:12px;
+                        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        padding:10px 18px;
+                        border-radius:8px;
+                        border:none;
+                        ">
+                        Acessar →
+                        </button>
                 </div>
             </div>
         `;
 
-        // Adicionar evento de clique
         cardDiv.addEventListener('click', () => {
             this.handleCardClick(card.id, card.title);
         });
@@ -100,152 +113,94 @@ class DashboardManager {
         return cardDiv;
     }
 
-    // Manipular clique no card
+    // Navegação por módulo
     handleCardClick(moduleId, moduleTitle) {
-        console.log(`Navegando para: ${moduleTitle}`);
-
         const modulePaths = {
-            'principal': 'Principal/principal.html',
-            'escalas': 'Escalas/escalas.html',
-            'funcionarios': 'Funcionarios/func.html',
-            'pacientes': 'Pacientes/pac.html',
-            'configuracoes': 'Configuracoes/config.html'
+            principal: 'Principal/principal.html',
+            escalas: 'Escalas/escalas.html',
+            funcionarios: 'Funcionarios/func.html',
+            pacientes: 'Pacientes/pac.html',
+            configuracoes: 'Configuracoes/config.html'
         };
 
         const path = modulePaths[moduleId];
 
-        if (path) {
-            // Caminho corrigido para a sua estrutura de pastas
-            window.location.href = `../apae/${path}`; 
-        } else {
-            alert(`Erro: Módulo "${moduleTitle}" não encontrado.`);
+        if (!path) {
+            alert(`Erro: módulo "${moduleTitle}" não encontrado.`);
+            return;
         }
+
+        // Ajuste do caminho real da sua pasta
+        window.location.href = path;
     }
 
-    // Atualizar informações do usuário no header melhorado
+    // Atualizar infos do usuário
     updateUserInfo() {
         const user = authManager.getCurrentUser();
         if (!user) return;
 
-        // Atualizar informações do usuário no canto direito
-        document.getElementById('user-name').textContent = user.name;
-        document.getElementById('user-role').textContent = user.isAdmin ? 'Administrador' : 'Usuário';
-        
-        // Atualizar mensagem de boas-vindas no centro
-        document.getElementById('welcome-message').textContent = 'Bem-vindo!';
-        document.getElementById('welcome-user').textContent = user.name;
+     
 
-        // Mostrar badge de admin se necessário
+        document.getElementById('welcome-user').textContent = user.name;
+        document.getElementById('welcome-message').textContent = 'Bem-vindo!';
+
         const adminBadge = document.getElementById('admin-badge');
-        if (user.isAdmin) {
-            adminBadge.style.display = 'inline-block';
-        } else {
-            adminBadge.style.display = 'none';
-        }
+        adminBadge.style.display = user.isAdmin ? 'inline-block' : 'none';
     }
 
-    // Atualizar data e hora
+    // Data e hora
     updateDateTime() {
         const now = new Date();
-        const dateTimeElement = document.getElementById('current-datetime');
-        
-        const dateStr = now.toLocaleDateString('pt-BR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        const timeStr = now.toLocaleTimeString('pt-BR', { 
-            hour: '2-digit', 
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        
-        dateTimeElement.textContent = `${dateStr} - ${timeStr}`;
+        document.getElementById('current-datetime').textContent =
+            now.toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }) + " - " +
+            now.toLocaleTimeString('pt-BR');
     }
 
-    // Inicializar dashboard
+    addCardAnimations() {
+        const cards = document.querySelectorAll('.dashboard-card');
+
+        cards.forEach((card, index) => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(25px)";
+
+            setTimeout(() => {
+                card.style.transition = "0.5s ease";
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+            }, index * 120);
+        });
+    }
+
+    // Logout
+    handleLogout() {
+        authManager.logout();
+        this.showScreen('login-screen');
+    }
+
+    // Mostrar tela
+    showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    // Inicialização
     init() {
         this.updateUserInfo();
-        this.updateDateTime();
         this.renderCards();
+        this.updateDateTime();
 
-        // Atualizar horário a cada segundo para mostrar segundos
-        setInterval(() => {
-            this.updateDateTime();
-        }, 1000);
+        setInterval(() => this.updateDateTime(), 1000);
 
-        // Adicionar evento de logout
         document.getElementById('logout-btn').addEventListener('click', () => {
             this.handleLogout();
         });
-
-        // Adicionar animações aos cards
-        this.addCardAnimations();
-    }
-
-    // Adicionar animações aos cards
-    addCardAnimations() {
-        const cards = document.querySelectorAll('.dashboard-card');
-        cards.forEach((card, index) => {
-            // Animação de entrada escalonada
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                card.style.transition = 'all 0.5s ease';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    }
-
-    // Manipular logout
-    handleLogout() {
-        if (confirm('Tem certeza que deseja sair?')) {
-            authManager.logout();
-            this.showScreen('login-screen');
-        }
-    }
-
-    // Mostrar tela específica
-    showScreen(screenId) {
-        // Esconder todas as telas
-        document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.remove('active');
-        });
-
-        // Mostrar tela específica
-        document.getElementById(screenId).classList.add('active');
-    }
-
-    // Atualizar estatísticas em tempo real (simulação)
-    updateStats() {
-        const statNumbers = document.querySelectorAll('.stat-number');
-        statNumbers.forEach(stat => {
-            const currentValue = parseInt(stat.textContent);
-            const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, ou 1
-            const newValue = Math.max(0, currentValue + variation);
-            
-            if (newValue !== currentValue) {
-                stat.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    stat.textContent = newValue;
-                    stat.style.transform = 'scale(1)';
-                }, 150);
-            }
-        });
-    }
-
-    // Inicializar atualizações periódicas
-    startPeriodicUpdates() {
-        // Atualizar estatísticas a cada 30 segundos
-        setInterval(() => {
-            this.updateStats();
-        }, 30000);
     }
 }
 
-// Instância global do gerenciador do dashboard
+// Instância global
 const dashboardManager = new DashboardManager();
-
